@@ -1,31 +1,25 @@
 #include <stdio.h>
 
-union Data {
-    int i;
-    float f;
-    char c;
-};
-
 int main(void) {
-    union Data data;
+    char str[100];
+    int length = 0, i;
 
-    printf("Size of union Data = %zu bytes\\n", sizeof(data));
+    printf("Enter a string (no spaces): ");
+    if (scanf("%99s", str) != 1) {
+        printf("Input error.\\n");
+        return 1;
+    }
 
-    data.i = 65;
-    printf("\\nAfter assigning data.i = 65:\\n");
-    printf("data.i = %d\\n", data.i);
-    printf("Address of data.i = %p\\n", (void *)&data.i);
+    while (str[length] != '\\0') {
+        length++;
+    }
 
-    data.f = 3.14f;
-    printf("\\nAfter assigning data.f = 3.14:\\n");
-    printf("data.f = %.2f\\n", data.f);
-    printf("Address of data.f = %p\\n", (void *)&data.f);
+    printf("Length of the string = %d\\n", length);
+    printf("Reversed string = ");
+    for (i = length - 1; i >= 0; i--) {
+        printf("%c", str[i]);
+    }
+    printf("\\n");
 
-    data.c = 'A';
-    printf("\\nAfter assigning data.c = 'A':\\n");
-    printf("data.c = %c\\n", data.c);
-    printf("Address of data.c = %p\\n", (void *)&data.c);
-
-    printf("\\nAll union members begin at the same memory address.\\n");
     return 0;
 }
